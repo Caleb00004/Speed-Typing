@@ -1,0 +1,84 @@
+        GENERAL NOTE:
+- React Assynchronusly change states.
+e.g 
+function myFunc() {
+    setgoal(true)
+    setTimeRemaining(STARTING_TIME)
+    setMessage("")
+    textBoxRef.current.focus()
+}
+
+When the above function is running?
+React will Assynchronusly change eacch state.
+i.e it will not chnage setGoal first then when done move to setTimeRemaining
+
+it will not stop the other lines of code (setTimeRemaining, setMessage) from executing while
+        its in the process of chnaging setGoal.
+
+        USEREF() HOOK
+allow to keep values alive for the entire lifeSpan of a Component. It returns an Object with a .current Property
+ .current Property: stores whatever you are saving in the useRef() Hook.
+             i.e if its an inout element, the current will contain the DOM element
+
+ - it does not cause a re-render
+
+- Can be used to store a mutable value that does not cause a re-render when updated.
+- Can be used to access a DOM element directly.
+
+    i.e
+saving input element in useRef
+
+import React, {useRef} from "react"
+
+const inputRef = useRef(null)
+
+<form>
+    <input ref={inputRef} type="text" name="todo" value={newTodoValue} onChange=
+</form>
+
+
+        useContext()Hook
+- Used to manage Context or simplify it
+
+AFter creating the Context in its file, export the context
+You can set up the provider normally i.e 
+
+import 'MyContext'
+
+<MyContext.provider>
+    ..
+</MyContext.provider>
+
+when want to consume the Context,
+import {useContext} from "react" 
+
+then set the useContext to the myContext
+
+i.e 
+import 'MyContext'
+import {useContext} from 'react'
+
+const 'varName' = useContext(MyContext)
+
+This would automatically be the Value object 
+so you can just use it normally.  console.log('varName'.'Property')
+
+            CUSTOM HOOKS [helps in Reusability] 
+- You can write your own Custom Hook.
+- it's not built into react or whatever its jut like a Pattern that react devs use.
+    Note: The Naming convetion = use'hook_name'
+
+
+Create a file that containis the functionality of the hook.
+
+the function will return an object containing = a state and method that operate on the state.
+it can also return an array containing state and method that operate on it.
+
+then you will default export the function and import it in any Component that needs it.
+
+import the custom Hook in the Component that needs it file.
+then you will first need to destructur it's Properties
+
+i.e {'Property1', 'Property2'} = 'customhook'()
+
+Note you can return more than one Properties, i.e your custom hooks can return multiple Properties in an object or array form.
